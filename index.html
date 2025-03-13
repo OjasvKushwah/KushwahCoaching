@@ -839,6 +839,82 @@
         }
         
         // Testimonial rotator
-        const testimonials = [
-            {
-                en: "My son
+const testimonials = [
+    {
+        en: "My son was failing in Math and Science. After joining Kushwah Coaching, he not only passed but scored 85%! Best decision we ever made.",
+        hi: "मेरा बेटा गणित और विज्ञान में फेल हो रहा था। कुशवाह कोचिंग में शामिल होने के बाद, वह न केवल पास हुआ बल्कि 85% अंक प्राप्त किए! हमारा सबसे अच्छा निर्णय।"
+    },
+    {
+        en: "Our daughter got selected for Navodaya Vidyalaya after just 6 months at Kushwah Coaching. The personal attention she received was incredible.",
+        hi: "कुशवाह कोचिंग में केवल 6 महीने के बाद हमारी बेटी का नवोदय विद्यालय के लिए चयन हुआ। उसे मिला व्यक्तिगत ध्यान अविश्वसनीय था।"
+    },
+    {
+        en: "I had tried 3 other coaching centers before coming to Kushwah Sir. The difference is clear - he actually cares about each student's success.",
+        hi: "कुशवाह सर के पास आने से पहले मैंने 3 अन्य कोचिंग सेंटरों की कोशिश की थी। अंतर स्पष्ट है - वह वास्तव में प्रत्येक छात्र की सफलता की परवाह करते हैं।"
+    }
+];
+
+let currentTestimonialIndex = 0;
+
+// Function to show testimonial banner
+function showTestimonialBanner() {
+    if (sessionStorage.getItem('testimonialSeen')) return;
+    
+    const testimonialBanner = document.createElement('div');
+    testimonialBanner.className = 'testimonial-banner';
+    testimonialBanner.id = 'testimonialBanner';
+    
+    updateTestimonialContent(testimonialBanner);
+    
+    const closeButton = document.createElement('span');
+    closeButton.innerHTML = '×';
+    closeButton.style = 'position:absolute; right:15px; top:15px; font-size:20px; cursor:pointer;';
+    closeButton.onclick = function() {
+        hidePopup('testimonialBanner');
+        sessionStorage.setItem('testimonialSeen', 'true');
+    };
+    
+    testimonialBanner.appendChild(closeButton);
+    document.body.appendChild(testimonialBanner);
+    
+    // Rotate testimonials every 8 seconds
+    setInterval(function() {
+        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+        updateTestimonialContent(testimonialBanner);
+    }, 8000);
+}
+
+function updateTestimonialContent(banner) {
+    const testimonial = testimonials[currentTestimonialIndex];
+    const content = currentLanguage === 'hindi' ? testimonial.hi : testimonial.en;
+    
+    banner.innerHTML = `
+        <div style="max-width:800px; margin:0 auto; position:relative; padding-right:25px;">
+            <p><strong>"${content}"</strong></p>
+            <div style="width:10px; height:10px; background:white; border-radius:50%; display:inline-block; margin:0 5px;"></div>
+            <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
+            <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
+        </div>
+    `;
+}
+
+// Show testimonial banner after 30 seconds
+setTimeout(showTestimonialBanner, 30000);
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    // All existing initialization code...
+    
+    // Additional analytics tracking
+    function trackEvent(action) {
+        // This would normally integrate with analytics services
+        console.log('Tracked event:', action);
+    }
+    
+    // Track calls
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function() {
+            trackEvent('call_button_clicked');
+        });
+    });
+});
