@@ -795,4 +795,61 @@
     let currentTestimonialIndex = 0;
     
     // Function to show testimonial banner
+        
     function showTestimonialBanner() {
+    const testimonial = testimonials[currentTestimonialIndex];
+    const testimonialText = currentLanguage === 'hindi' ? testimonial.hi : testimonial.en;
+    
+    // Create testimonial banner if it doesn't exist
+    if (!document.getElementById('testimonialBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'testimonialBanner';
+        banner.className = 'testimonial-banner';
+        
+        const text = document.createElement('p');
+        text.id = 'testimonialText';
+        text.textContent = testimonialText;
+        
+        const closeBtn = document.createElement('span');
+        closeBtn.className = 'popup-close';
+        closeBtn.textContent = '×';
+        closeBtn.onclick = function() {
+            hidePopup('testimonialBanner');
+        };
+        
+        banner.appendChild(closeBtn);
+        banner.appendChild(text);
+        document.body.appendChild(banner);
+    } else {
+        document.getElementById('testimonialText').textContent = testimonialText;
+    }
+    
+    // Rotate to next testimonial
+    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+}
+
+// Function to hide popups
+function hidePopup(id) {
+    const popup = document.getElementById(id);
+    if (popup) {
+        popup.remove();
+    }
+}
+
+// Check if language is already set
+window.onload = function() {
+    if (!localStorage.getItem('language')) {
+        document.getElementById('languageModal').style.display = 'flex';
+    } else {
+        setLanguage(localStorage.getItem('language'));
+    }
+    
+    // Show testimonial banner after 3 seconds
+    setTimeout(showTestimonialBanner, 3000);
+    
+    // Rotate testimonials every 20 seconds
+    setInterval(showTestimonialBanner, 20000);
+};
+</script>
+</body>
+</html>
