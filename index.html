@@ -718,10 +718,6 @@
 
     <!-- Language Switching Script -->
     <script>
-    // Add this at the beginning of your window.onload function
-    window.onload = function() {
-    // Force scroll to top when page loads
-    window.scrollTo(0, 0);
         
     // Initialize language variable
     let currentLanguage = localStorage.getItem('language') || 'english';
@@ -843,6 +839,10 @@ function hidePopup(id) {
 
 // Check if language is already set
 window.onload = function() {
+    // Force scroll to top when page loads
+    window.scrollTo(0, 0);
+    
+    // Check if language is already set
     if (!localStorage.getItem('language')) {
         document.getElementById('languageModal').style.display = 'flex';
     } else {
