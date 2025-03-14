@@ -338,6 +338,43 @@
             box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
         }
         
+        .final-warning {
+            background-color: #fee2e2;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        
+        .final-warning h2 {
+            color: #dc2626;
+            margin-bottom: 1.5rem;
+        }
+        
+        .final-warning ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .final-warning ul li {
+            margin-bottom: 0.8rem;
+            color: #7f1d1d;
+        }
+        
+        .final-warning p {
+            margin: 1.5rem 0;
+        }
+        
+        .final-warning .cta-button {
+            background-color: #dc2626;
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+        }
+        
         footer {
             background-color: #1e293b;
             color: var(--white);
@@ -396,29 +433,6 @@
             color: white;
             padding: 15px 25px;
             max-width: 300px;
-        }
-        
-        .exit-popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .exit-popup-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
         }
         
         .testimonial-banner {
@@ -484,7 +498,7 @@
                 <a href="#contact" class="nav-link" data-en="Contact" data-hi="संपर्क">Contact</a>
             </div>
         </nav>
-    </header>
+     </header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -644,6 +658,35 @@
         </div>
     </section>
 
+    <!-- Final Warning Section -->
+    <section class="section final-warning">
+        <div class="section-title">
+            <h2 data-en="WARNING: Is Your Child's Future at Risk?" data-hi="चेतावनी: क्या आपके बच्चे का भविष्य खतरे में है?">WARNING: Is Your Child's Future at Risk?</h2>
+        </div>
+        
+        <p data-en="Every year, we see the devastating consequences of wrong educational choices. Don't let your child become another statistic." data-hi="हर साल, हम गलत शैक्षिक विकल्पों के विनाशकारी परिणाम देखते हैं। अपने बच्चे को एक और आंकड़ा न बनने दें।">Every year, we see the devastating consequences of wrong educational choices. Don't let your child become another statistic.</p>
+        
+        <ul>
+            <li data-en="60% of students who fail once continue to struggle throughout their academic life - a cycle that can be broken with proper guidance." data-hi="60% छात्र जो एक बार फेल होते हैं, वे अपने पूरे शैक्षिक जीवन में संघर्ष करते रहते हैं - यह चक्र उचित मार्गदर्शन से टूट सकता है।">60% of students who fail once continue to struggle throughout their academic life - a cycle that can be broken with proper guidance.</li>
+            
+            <li data-en="Students who miss competitive exam opportunities in early years often face limited career options and lower lifetime earnings." data-hi="छात्र जो शुरुआती वर्षों में प्रतिस्पर्धी परीक्षा के अवसरों को खो देते हैं, उन्हें अक्सर सीमित करियर विकल्प और कम जीवनकाल की कमाई का सामना करना पड़ता है।">Students who miss competitive exam opportunities in early years often face limited career options and lower lifetime earnings.</li>
+            
+            <li data-en="Large coaching centers treat students as numbers - your child deserves personalized attention that addresses their specific weaknesses." data-hi="बड़े कोचिंग सेंटर छात्रों को संख्या के रूप में देखते हैं - आपके बच्चे को व्यक्तिगत ध्यान मिलना चाहिए जो उनकी विशिष्ट कमजोरियों को दूर करता है।">Large coaching centers treat students as numbers - your child deserves personalized attention that addresses their specific weaknesses.</li>
+            
+            <li data-en="The difference between a mediocre and excellent education compounds over time, creating an unbridgeable gap in opportunities." data-hi="मध्यम और उत्कृष्ट शिक्षा के बीच का अंतर समय के साथ बढ़ता जाता है, जिससे अवसरों में एक अपार अंतर पैदा होता है।">The difference between a mediocre and excellent education compounds over time, creating an unbridgeable gap in opportunities.</li>
+            
+            <li data-en="Many parents realize their mistake too late - when their child is already struggling and falling behind peers. By then, precious years are lost." data-hi="कई माता-पिता अपनी गलती को बहुत देर से समझते हैं - जब उनका बच्चा पहले से ही संघर्ष कर रहा होता है और साथियों से पिछड़ रहा होता है। तब तक, कीमती वर्ष खो चुके होते हैं।">Many parents realize their mistake too late - when their child is already struggling and falling behind peers. By then, precious years are lost.</li>
+            
+            <li data-en="Academic failures often lead to depression and low self-esteem in children - emotional scars that can last a lifetime." data-hi="शैक्षिक असफलताएं अक्सर बच्चों में अवसाद और कम आत्मसम्मान का कारण बनती हैं - भावनात्मक घाव जो जीवन भर रह सकते हैं।">Academic failures often lead to depression and low self-esteem in children - emotional scars that can last a lifetime.</li>
+        </ul>
+        
+        <p data-en="The right coaching isn't an expense - it's an investment in your child's entire future. Can you afford to make the wrong choice?" data-hi="सही कोचिंग एक खर्च नहीं है - यह आपके बच्चे के पूरे भविष्य में एक निवेश है। क्या आप गलत विकल्प चुनने का जोखिम उठा सकते हैं?">The right coaching isn't an expense - it's an investment in your child's entire future. Can you afford to make the wrong choice?</p>
+        
+        <p data-en="Time is running out! Last few seats remaining for this academic year!" data-hi="समय निकला जा रहा है! इस शैक्षणिक वर्ष के लिए अंतिम कुछ सीटें बची हैं!">Time is running out! Last few seats remaining for this academic year!</p>
+        
+        <a href="tel:7509021814" class="cta-button" data-en="SECURE YOUR CHILD'S FUTURE NOW" data-hi="अभी अपने बच्चे का भविष्य सुरक्षित करें">SECURE YOUR CHILD'S FUTURE NOW</a>
+    </section>
+
     <!-- Contact Section -->
     <section class="section contact" id="contact">
         <div class="section-title">
@@ -724,9 +767,6 @@
     function hidePopup(id) {
         const popup = document.getElementById(id);
         if (popup) {
-            if (id === 'exitPopupOverlay') {
-                document.body.style.overflow = 'auto';
-            }
             popup.remove();
         }
     }
@@ -756,150 +796,3 @@
     
     // Function to show testimonial banner
     function showTestimonialBanner() {
-        if (sessionStorage.getItem('testimonialSeen')) return;
-        
-        const testimonialBanner = document.createElement('div');
-        testimonialBanner.className = 'testimonial-banner';
-        testimonialBanner.id = 'testimonialBanner';
-        
-        updateTestimonialContent(testimonialBanner);
-        
-        const closeButton = document.createElement('span');
-        closeButton.innerHTML = '×';
-        closeButton.style = 'position:absolute; right:15px; top:15px; font-size:20px; cursor:pointer;';
-        closeButton.onclick = function() {
-            hidePopup('testimonialBanner');
-            sessionStorage.setItem('testimonialSeen', 'true');
-        };
-        
-        testimonialBanner.appendChild(closeButton);
-        document.body.appendChild(testimonialBanner);
-        
-        // Rotate testimonials every 8 seconds
-        setInterval(function() {
-            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-            updateTestimonialContent(testimonialBanner);
-        }, 8000);
-    }
-    
-    function updateTestimonialContent(banner) {
-        const testimonial = testimonials[currentTestimonialIndex];
-        const content = currentLanguage === 'hindi' ? testimonial.hi : testimonial.en;
-        
-        banner.innerHTML = `
-            <div style="max-width:800px; margin:0 auto; position:relative; padding-right:25px;">
-                <p><strong>"${content}"</strong></p>
-                <div style="width:10px; height:10px; background:white; border-radius:50%; display:inline-block; margin:0 5px;"></div>
-                <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
-                <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
-            </div>
-        `;
-    }
-    
-    // On page load
-    document.addEventListener('DOMContentLoaded', function() {
-        // If language is already set, hide modal and update text
-        if (localStorage.getItem('language')) {
-            document.getElementById('languageModal').style.display = 'none';
-        }
-        
-        // Update text and toggle buttons
-        updateLanguage();
-        updateToggleButtons();
-        
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    });
-    
-    // Show offer popup after 15 seconds
-    setTimeout(function() {
-        if (!sessionStorage.getItem('offerPopupShown')) {
-            const offerPopup = document.createElement('div');
-            offerPopup.className = 'popup offer-popup';
-            offerPopup.id = 'offerPopup';
-            
-            if (currentLanguage === 'hindi') {
-                offerPopup.innerHTML = `
-                    <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
-                    <h3 style="margin-top:0">अंतिम कुछ सीटें बची हैं!</h3>
-                    <p>अभी कॉल करके अपने बच्चे का भविष्य सुरक्षित करें। आपकी देरी आपके बच्चे का नुकसान कर सकती है!</p>
-                    <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">अभी कॉल करें</button>
-                `;
-            } else {
-                offerPopup.innerHTML = `
-                    <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
-                    <h3 style="margin-top:0">Last Few Seats Remaining!</h3>
-                    <p>Call now to secure your child's future. Your delay could cost your child's opportunity!</p>
-                    <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">Call Now</button>
-                `;
-            }
-            
-            document.body.appendChild(offerPopup);
-            sessionStorage.setItem('offerPopupShown', 'true');
-        }
-    }, 15000);
-    
-    // Exit intent popup
-    document.addEventListener('mouseleave', function(e) {
-        if (e.clientY < 0 && !sessionStorage.getItem('exitPopupShown')) {
-            showExitPopup();
-        }
-    });
-    
-    function showExitPopup() {
-        const exitPopupOverlay = document.createElement('div');
-        exitPopupOverlay.className = 'exit-popup-overlay';
-        exitPopupOverlay.id = 'exitPopupOverlay';
-        
-        const exitPopupContent = document.createElement('div');
-        exitPopupContent.className = 'exit-popup-content';
-        
-        if (currentLanguage === 'hindi') {
-            exitPopupContent.innerHTML = `
-                <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
-                <h2 style="color:#2563eb; margin-top:0">रुकिए! क्या आप सचमुच अपने बच्चे का भविष्य दांव पर लगाना चाहते हैं?</h2>
-                <p>हर साल सैकड़ों माता-पिता गलत कोचिंग चुनकर अपने बच्चों का भविष्य बर्बाद कर देते हैं। क्या आप भी उनमें से एक बनना चाहते हैं?</p>
-                <p><strong>कुशवाह कोचिंग में आपका बच्चा पाएगा:</strong></p>
-                <ul style="text-align:left; padding-left:20px">
-                    <li>असफल छात्र भी टॉपर बनते हैं - हमारा ट्रैक रिकॉर्ड गवाह है</li>
-                    <li>20+ वर्षों का अनुभव - नए शिक्षकों पर भरोसा क्यों करें?</li>
-                    <li>प्रतिष्ठित परीक्षाओं में सफलता - आपका बच्चा अगला चयनित विद्यार्थी हो सकता है</li>
-                    <li>छोटे बैच - हम आपके बच्चे को भीड़ में नहीं खोने देते</li>
-                </ul>
-                <p style="font-weight:bold; color:red;">वक्त निकला जा रहा है! आज ही फोन करें - पहले 5 छात्रों के लिए 15% छूट!</p>
-                <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">अभी कॉल करें</button>
-            `;
-        } else {
-            exitPopupContent.innerHTML = `
-                <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
-                <h2 style="color:#2563eb; margin-top:0">Wait! Are you really willing to gamble with your child's future?</h2>
-                <p>Every year, hundreds of parents ruin their children's futures by choosing the wrong coaching. Do you want to be one of them?</p>
-                <p><strong>At Kushwah Coaching, your child will get:</strong></p>
-                <ul style="text-align:left; padding-left:20px">
-                    <li>Failing students become toppers - our track record proves it</li>
-                    <li>20+ years of experience - why trust novice teachers?</li>
-                    <li>Success in prestigious exams - your child could be the next selection</li>
-                    <li>Small batches - we don't lose your child in the crowd</li>
-                </ul>
-                <p style="font-weight:bold; color:red;">Time is running out! Call today - 15% discount for the first 5 students!</p>
-                <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">Call Now</button>
-            `;
-        }
-        
-        exitPopupOverlay.appendChild(exitPopupContent);
-        document.body.appendChild(exitPopupOverlay);
-        document.body.style.overflow = 'hidden';
-        sessionStorage.setItem('exitPopupShown', 'true');
-    }
-    
-    // Show testimonial banner after 30 seconds
-    setTimeout(showTestimonialBanner, 30000);
-    </script>
