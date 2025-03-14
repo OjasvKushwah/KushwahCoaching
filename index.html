@@ -718,6 +718,11 @@
 
     <!-- Language Switching Script -->
     <script>
+    // Add this at the beginning of your window.onload function
+    window.onload = function() {
+    // Force scroll to top when page loads
+    window.scrollTo(0, 0);
+        
     // Initialize language variable
     let currentLanguage = localStorage.getItem('language') || 'english';
     
