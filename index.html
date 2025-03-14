@@ -675,246 +675,231 @@
 
     <!-- Language Switching Script -->
     <script>
-        // Check if language is already set in localStorage
-        let currentLanguage = localStorage.getItem('language') || 'english';
+    // Initialize language variable
+    let currentLanguage = localStorage.getItem('language') || 'english';
+    
+    // Function to set language
+    function setLanguage(language) {
+        currentLanguage = language;
+        localStorage.setItem('language', language);
         
-        // Function to set language
-        function setLanguage(language) {
-            currentLanguage = language;
-            localStorage.setItem('language', language);
-            
-            // Hide the modal
-            document.getElementById('languageModal').style.display = 'none';
-            
-            // Update all text on the page
-            updateLanguage();
-            
-            // Update toggle buttons
-            updateToggleButtons();
-        }
+        // Hide the modal
+        document.getElementById('languageModal').style.display = 'none';
         
-        // Function to update text based on selected language
-        function updateLanguage() {
-            const elements = document.querySelectorAll('[data-en]');
-            
-            elements.forEach(element => {
-                if (currentLanguage === 'hindi' && element.hasAttribute('data-hi')) {
-                    element.textContent = element.getAttribute('data-hi');
-                } else {
-                    element.textContent = element.getAttribute('data-en');
-                }
-            });
-        }
+        // Update all text on the page
+        updateLanguage();
         
-        // Function to update toggle button styles
-        function updateToggleButtons() {
-            const enBtn = document.getElementById('enBtn');
-            const hiBtn = document.getElementById('hiBtn');
-            
-            if (currentLanguage === 'english') {
-                enBtn.classList.add('active');
-                hiBtn.classList.remove('active');
+        // Update toggle buttons
+        updateToggleButtons();
+    }
+    
+    // Function to update text based on selected language
+    function updateLanguage() {
+        const elements = document.querySelectorAll('[data-en]');
+        
+        elements.forEach(element => {
+            if (currentLanguage === 'hindi' && element.hasAttribute('data-hi')) {
+                element.textContent = element.getAttribute('data-hi');
             } else {
-                hiBtn.classList.add('active');
-                enBtn.classList.remove('active');
+                element.textContent = element.getAttribute('data-en');
             }
+        });
+    }
+    
+    // Function to update toggle button styles
+    function updateToggleButtons() {
+        const enBtn = document.getElementById('enBtn');
+        const hiBtn = document.getElementById('hiBtn');
+        
+        if (currentLanguage === 'english') {
+            enBtn.classList.add('active');
+            hiBtn.classList.remove('active');
+        } else {
+            hiBtn.classList.add('active');
+            enBtn.classList.remove('active');
+        }
+    }
+    
+    // Function to hide popups
+    function hidePopup(id) {
+        const popup = document.getElementById(id);
+        if (popup) {
+            if (id === 'exitPopupOverlay') {
+                document.body.style.overflow = 'auto';
+            }
+            popup.remove();
+        }
+    }
+    
+    // Function to call now
+    function callNow() {
+        window.location.href = 'tel:7509021814';
+    }
+    
+    // Testimonial rotator
+    const testimonials = [
+        {
+            en: "My son was failing in Math and Science. After joining Kushwah Coaching, he not only passed but scored 85%! Best decision we ever made.",
+            hi: "मेरा बेटा गणित और विज्ञान में फेल हो रहा था। कुशवाह कोचिंग में शामिल होने के बाद, वह न केवल पास हुआ बल्कि 85% अंक प्राप्त किए! हमारा सबसे अच्छा निर्णय।"
+        },
+        {
+            en: "Our daughter got selected for Navodaya Vidyalaya after just 6 months at Kushwah Coaching. The personal attention she received was incredible.",
+            hi: "कुशवाह कोचिंग में केवल 6 महीने के बाद हमारी बेटी का नवोदय विद्यालय के लिए चयन हुआ। उसे मिला व्यक्तिगत ध्यान अविश्वसनीय था।"
+        },
+        {
+            en: "I had tried 3 other coaching centers before coming to Kushwah Sir. The difference is clear - he actually cares about each student's success.",
+            hi: "कुशवाह सर के पास आने से पहले मैंने 3 अन्य कोचिंग सेंटरों की कोशिश की थी। अंतर स्पष्ट है - वह वास्तव में प्रत्येक छात्र की सफलता की परवाह करते हैं।"
+        }
+    ];
+    
+    let currentTestimonialIndex = 0;
+    
+    // Function to show testimonial banner
+    function showTestimonialBanner() {
+        if (sessionStorage.getItem('testimonialSeen')) return;
+        
+        const testimonialBanner = document.createElement('div');
+        testimonialBanner.className = 'testimonial-banner';
+        testimonialBanner.id = 'testimonialBanner';
+        
+        updateTestimonialContent(testimonialBanner);
+        
+        const closeButton = document.createElement('span');
+        closeButton.innerHTML = '×';
+        closeButton.style = 'position:absolute; right:15px; top:15px; font-size:20px; cursor:pointer;';
+        closeButton.onclick = function() {
+            hidePopup('testimonialBanner');
+            sessionStorage.setItem('testimonialSeen', 'true');
+        };
+        
+        testimonialBanner.appendChild(closeButton);
+        document.body.appendChild(testimonialBanner);
+        
+        // Rotate testimonials every 8 seconds
+        setInterval(function() {
+            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+            updateTestimonialContent(testimonialBanner);
+        }, 8000);
+    }
+    
+    function updateTestimonialContent(banner) {
+        const testimonial = testimonials[currentTestimonialIndex];
+        const content = currentLanguage === 'hindi' ? testimonial.hi : testimonial.en;
+        
+        banner.innerHTML = `
+            <div style="max-width:800px; margin:0 auto; position:relative; padding-right:25px;">
+                <p><strong>"${content}"</strong></p>
+                <div style="width:10px; height:10px; background:white; border-radius:50%; display:inline-block; margin:0 5px;"></div>
+                <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
+                <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
+            </div>
+        `;
+    }
+    
+    // On page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // If language is already set, hide modal and update text
+        if (localStorage.getItem('language')) {
+            document.getElementById('languageModal').style.display = 'none';
         }
         
-        // On page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // If language is already set, hide modal and update text
-            if (localStorage.getItem('language')) {
-                document.getElementById('languageModal').style.display = 'none';
-            }
-            
-            // Update text and toggle buttons
-            updateLanguage();
-            updateToggleButtons();
-            
-            // Add smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        // Update text and toggle buttons
+        updateLanguage();
+        updateToggleButtons();
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
-        
-        // Show offer popup after 15 seconds
-        setTimeout(function() {
-            if (!sessionStorage.getItem('offerPopupShown')) {
-                const offerPopup = document.createElement('div');
-                offerPopup.className = 'popup offer-popup';
-                offerPopup.id = 'offerPopup';
-                
-                if (currentLanguage === 'hindi') {
-                    offerPopup.innerHTML = `
-                        <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
-                        <h3 style="margin-top:0">अंतिम कुछ सीटें बची हैं!</h3>
-                        <p>अभी कॉल करके अपने बच्चे का भविष्य सुरक्षित करें। आपकी देरी आपके बच्चे का नुकसान कर सकती है!</p>
-                        <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">अभी कॉल करें</button>
-                    `;
-                } else {
-                    offerPopup.innerHTML = `
-                        <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
-                        <h3 style="margin-top:0">Last Few Seats Remaining!</h3>
-                        <p>Call now to secure your child's future. Your delay could cost your child's opportunity!</p>
-                        <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">Call Now</button>
-                    `;
-                }
-                
-                document.body.appendChild(offerPopup);
-                sessionStorage.setItem('offerPopupShown', 'true');
-            }
-        }, 15000);
-        
-        // Exit intent popup
-        document.addEventListener('mouseleave', function(e) {
-            if (e.clientY < 0 && !sessionStorage.getItem('exitPopupShown')) {
-                showExitPopup();
-            }
-        });
-        
-        function showExitPopup() {
-            const exitPopupOverlay = document.createElement('div');
-            exitPopupOverlay.className = 'exit-popup-overlay';
-            exitPopupOverlay.id = 'exitPopupOverlay';
-            
-            const exitPopupContent = document.createElement('div');
-            exitPopupContent.className = 'exit-popup-content';
+    });
+    
+    // Show offer popup after 15 seconds
+    setTimeout(function() {
+        if (!sessionStorage.getItem('offerPopupShown')) {
+            const offerPopup = document.createElement('div');
+            offerPopup.className = 'popup offer-popup';
+            offerPopup.id = 'offerPopup';
             
             if (currentLanguage === 'hindi') {
-                exitPopupContent.innerHTML = `
-                    <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
-                    <h2 style="color:#2563eb; margin-top:0">रुकिए! क्या आप सचमुच अपने बच्चे का भविष्य दांव पर लगाना चाहते हैं?</h2>
-                    <p>हर साल सैकड़ों माता-पिता गलत कोचिंग चुनकर अपने बच्चों का भविष्य बर्बाद कर देते हैं। क्या आप भी उनमें से एक बनना चाहते हैं?</p>
-                    <p><strong>कुशवाह कोचिंग में आपका बच्चा पाएगा:</strong></p>
-                    <ul style="text-align:left; padding-left:20px">
-                        <li>असफल छात्र भी टॉपर बनते हैं - हमारा ट्रैक रिकॉर्ड गवाह है</li>
-                        <li>20+ वर्षों का अनुभव - नए शिक्षकों पर भरोसा क्यों करें?</li>
-                        <li>प्रतिष्ठित परीक्षाओं में सफलता - आपका बच्चा अगला चयनित विद्यार्थी हो सकता है</li>
-                        <li>छोटे बैच - हम आपके बच्चे को भीड़ में नहीं खोने देते</li>
-                    </ul>
-                    <p style="font-weight:bold; color:red;">वक्त निकला जा रहा है! आज ही फोन करें - पहले 5 छात्रों के लिए 15% छूट!</p>
-                    <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">अभी कॉल करें</button>
+                offerPopup.innerHTML = `
+                    <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
+                    <h3 style="margin-top:0">अंतिम कुछ सीटें बची हैं!</h3>
+                    <p>अभी कॉल करके अपने बच्चे का भविष्य सुरक्षित करें। आपकी देरी आपके बच्चे का नुकसान कर सकती है!</p>
+                    <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">अभी कॉल करें</button>
                 `;
             } else {
-                exitPopupContent.innerHTML = `
-                    <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
-                    <h2 style="color:#2563eb; margin-top:0">Wait! Are you really willing to gamble with your child's future?</h2>
-                    <p>Every year, hundreds of parents ruin their children's futures by choosing the wrong coaching. Do you want to be one of them?</p>
-                    <p><strong>At Kushwah Coaching, your child will get:</strong></p>
-                    <ul style="text-align:left; padding-left:20px">
-                        <li>Failing students become toppers - our track record proves it</li>
-                        <li>20+ years of experience - why trust novice teachers?</li>
-                        <li>Success in prestigious exams - your child could be the next selection</li>
-                        <li>Small batches - we don't lose your child in the crowd</li>
-                    </ul>
-                    <p style="font-weight:bold; color:red;">Time is running out! Call today - 15% discount for the first 5 students!</p>
-                    <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">Call Now</button>
+                offerPopup.innerHTML = `
+                    <span class="popup-close" onclick="hidePopup('offerPopup')">×</span>
+                    <h3 style="margin-top:0">Last Few Seats Remaining!</h3>
+                    <p>Call now to secure your child's future. Your delay could cost your child's opportunity!</p>
+                    <button onclick="callNow()" style="background:#fff; color:#f97316; border:none; padding:8px 15px; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">Call Now</button>
                 `;
             }
             
-            exitPopupOverlay.appendChild(exitPopupContent);
-            document.body.appendChild(exitPopupOverlay);
-            document.body.style.overflow = 'hidden';
-            sessionStorage.setItem('exitPopupShown', 'true');
+            document.body.appendChild(offerPopup);
+            sessionStorage.setItem('offerPopupShown', 'true');
         }
-        
-        function callNow() {
-            window.location.href = 'tel:7509021814';
+    }, 15000);
+    
+    // Exit intent popup
+    document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 0 && !sessionStorage.getItem('exitPopupShown')) {
+            showExitPopup();
         }
-        
-        function hidePopup(id) {
-            const popup = document.getElementById(id);
-            if (popup) {
-                if (id === 'exitPopupOverlay') {
-                    document.body.style.overflow = 'auto';
-                }
-                popup.remove();
-            }
-        }
-        
-        // Testimonial rotator
-const testimonials = [
-    {
-        en: "My son was failing in Math and Science. After joining Kushwah Coaching, he not only passed but scored 85%! Best decision we ever made.",
-        hi: "मेरा बेटा गणित और विज्ञान में फेल हो रहा था। कुशवाह कोचिंग में शामिल होने के बाद, वह न केवल पास हुआ बल्कि 85% अंक प्राप्त किए! हमारा सबसे अच्छा निर्णय।"
-    },
-    {
-        en: "Our daughter got selected for Navodaya Vidyalaya after just 6 months at Kushwah Coaching. The personal attention she received was incredible.",
-        hi: "कुशवाह कोचिंग में केवल 6 महीने के बाद हमारी बेटी का नवोदय विद्यालय के लिए चयन हुआ। उसे मिला व्यक्तिगत ध्यान अविश्वसनीय था।"
-    },
-    {
-        en: "I had tried 3 other coaching centers before coming to Kushwah Sir. The difference is clear - he actually cares about each student's success.",
-        hi: "कुशवाह सर के पास आने से पहले मैंने 3 अन्य कोचिंग सेंटरों की कोशिश की थी। अंतर स्पष्ट है - वह वास्तव में प्रत्येक छात्र की सफलता की परवाह करते हैं।"
-    }
-];
-
-let currentTestimonialIndex = 0;
-
-// Function to show testimonial banner
-function showTestimonialBanner() {
-    if (sessionStorage.getItem('testimonialSeen')) return;
-    
-    const testimonialBanner = document.createElement('div');
-    testimonialBanner.className = 'testimonial-banner';
-    testimonialBanner.id = 'testimonialBanner';
-    
-    updateTestimonialContent(testimonialBanner);
-    
-    const closeButton = document.createElement('span');
-    closeButton.innerHTML = '×';
-    closeButton.style = 'position:absolute; right:15px; top:15px; font-size:20px; cursor:pointer;';
-    closeButton.onclick = function() {
-        hidePopup('testimonialBanner');
-        sessionStorage.setItem('testimonialSeen', 'true');
-    };
-    
-    testimonialBanner.appendChild(closeButton);
-    document.body.appendChild(testimonialBanner);
-    
-    // Rotate testimonials every 8 seconds
-    setInterval(function() {
-        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-        updateTestimonialContent(testimonialBanner);
-    }, 8000);
-}
-
-function updateTestimonialContent(banner) {
-    const testimonial = testimonials[currentTestimonialIndex];
-    const content = currentLanguage === 'hindi' ? testimonial.hi : testimonial.en;
-    
-    banner.innerHTML = `
-        <div style="max-width:800px; margin:0 auto; position:relative; padding-right:25px;">
-            <p><strong>"${content}"</strong></p>
-            <div style="width:10px; height:10px; background:white; border-radius:50%; display:inline-block; margin:0 5px;"></div>
-            <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
-            <div style="width:10px; height:10px; background:rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 5px;"></div>
-        </div>
-    `;
-}
-
-// Show testimonial banner after 30 seconds
-setTimeout(showTestimonialBanner, 30000);
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    // All existing initialization code...
-    
-    // Additional analytics tracking
-    function trackEvent(action) {
-        // This would normally integrate with analytics services
-        console.log('Tracked event:', action);
-    }
-    
-    // Track calls
-    document.querySelectorAll('.cta-button').forEach(button => {
-        button.addEventListener('click', function() {
-            trackEvent('call_button_clicked');
-        });
     });
-});
+    
+    function showExitPopup() {
+        const exitPopupOverlay = document.createElement('div');
+        exitPopupOverlay.className = 'exit-popup-overlay';
+        exitPopupOverlay.id = 'exitPopupOverlay';
+        
+        const exitPopupContent = document.createElement('div');
+        exitPopupContent.className = 'exit-popup-content';
+        
+        if (currentLanguage === 'hindi') {
+            exitPopupContent.innerHTML = `
+                <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
+                <h2 style="color:#2563eb; margin-top:0">रुकिए! क्या आप सचमुच अपने बच्चे का भविष्य दांव पर लगाना चाहते हैं?</h2>
+                <p>हर साल सैकड़ों माता-पिता गलत कोचिंग चुनकर अपने बच्चों का भविष्य बर्बाद कर देते हैं। क्या आप भी उनमें से एक बनना चाहते हैं?</p>
+                <p><strong>कुशवाह कोचिंग में आपका बच्चा पाएगा:</strong></p>
+                <ul style="text-align:left; padding-left:20px">
+                    <li>असफल छात्र भी टॉपर बनते हैं - हमारा ट्रैक रिकॉर्ड गवाह है</li>
+                    <li>20+ वर्षों का अनुभव - नए शिक्षकों पर भरोसा क्यों करें?</li>
+                    <li>प्रतिष्ठित परीक्षाओं में सफलता - आपका बच्चा अगला चयनित विद्यार्थी हो सकता है</li>
+                    <li>छोटे बैच - हम आपके बच्चे को भीड़ में नहीं खोने देते</li>
+                </ul>
+                <p style="font-weight:bold; color:red;">वक्त निकला जा रहा है! आज ही फोन करें - पहले 5 छात्रों के लिए 15% छूट!</p>
+                <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">अभी कॉल करें</button>
+            `;
+        } else {
+            exitPopupContent.innerHTML = `
+                <span class="popup-close" onclick="hidePopup('exitPopupOverlay')">×</span>
+                <h2 style="color:#2563eb; margin-top:0">Wait! Are you really willing to gamble with your child's future?</h2>
+                <p>Every year, hundreds of parents ruin their children's futures by choosing the wrong coaching. Do you want to be one of them?</p>
+                <p><strong>At Kushwah Coaching, your child will get:</strong></p>
+                <ul style="text-align:left; padding-left:20px">
+                    <li>Failing students become toppers - our track record proves it</li>
+                    <li>20+ years of experience - why trust novice teachers?</li>
+                    <li>Success in prestigious exams - your child could be the next selection</li>
+                    <li>Small batches - we don't lose your child in the crowd</li>
+                </ul>
+                <p style="font-weight:bold; color:red;">Time is running out! Call today - 15% discount for the first 5 students!</p>
+                <button onclick="callNow()" style="background:#f97316; color:white; border:none; padding:10px 25px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; font-size:16px">Call Now</button>
+            `;
+        }
+        
+        exitPopupOverlay.appendChild(exitPopupContent);
+        document.body.appendChild(exitPopupOverlay);
+        document.body.style.overflow = 'hidden';
+        sessionStorage.setItem('exitPopupShown', 'true');
+    }
+    
+    // Show testimonial banner after 30 seconds
+    setTimeout(showTestimonialBanner, 30000);
+    </script>
